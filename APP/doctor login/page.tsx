@@ -145,4 +145,4 @@ const doctorProfiles: Doctor[] = [
     );
   };
   
-  export default DoctorLoginPage
+  export default DoctorLoginPage;
