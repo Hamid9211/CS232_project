@@ -190,4 +190,122 @@ const Dashboard: React.FC = () => {
         Calmness: avgCalmness
       };
     });
-    
+   return monthlyData;
+  };
+
+  return (
+    <div
+      className={`p-5 min-h-screen transition-colors duration-300 ${
+        darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'
+      }`}
+    >
+      <h1
+        className={`text-xl font-bold mb-5 text-center transition-colors duration-300 ${
+          darkMode ? 'text-gray-100' : 'text-gray-800'
+        }`}
+      >
+        Hello, This is your Mental Health Support Dashboard Overview
+      </h1>
+      <div className="flex flex-col space-y-6">
+        <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+          <div
+            className={`w-full md:w-1/2 h-80 shadow-xl rounded-lg p-4 transition-colors duration-300 ${
+              darkMode
+                ? 'bg-gradient-to-r from-blue-900 to-blue-800 text-white'
+                : 'bg-gradient-to-r from-blue-200 to-blue-100 text-gray-800'
+            }`}
+          >
+            <h2 className="text-xl font-bold mb-2">Weekly Overview</h2>
+            {weeklyData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="85%">
+                <LineChart
+                  data={weeklyData}
+                  margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke={darkMode ? '#555' : '#ccc'} />
+                  <XAxis 
+                    dataKey="date" 
+                    stroke={darkMode ? '#fff' : '#333'} 
+                    tick={{ fill: darkMode ? '#fff' : '#333' }} 
+                  />
+                  <YAxis stroke={darkMode ? '#fff' : '#333'} tick={{ fill: darkMode ? '#fff' : '#333' }} />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: darkMode ? '#333' : '#fff',
+                      color: darkMode ? '#fff' : '#333',
+                      border: `1px solid ${darkMode ? '#555' : '#ddd'}`
+                    }} 
+                  />
+                  <Legend wrapperStyle={{ color: darkMode ? '#fff' : '#333' }} />
+                  <Line type="monotone" dataKey="Happiness" stroke="#8884d8" activeDot={{ r: 8 }} />
+                  <Line type="monotone" dataKey="Energy" stroke="#82ca9d" />
+                  <Line type="monotone" dataKey="Stress" stroke="#ff7300" />
+                  <Line type="monotone" dataKey="Focus" stroke="#0088fe" />
+                  <Line type="monotone" dataKey="Calmness" stroke="#00C49F" />
+                </LineChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <p>No weekly data available</p>
+              </div>
+            )}
+          </div>
+          <div
+            className={`w-full md:w-1/2 h-80 shadow-xl rounded-lg p-4 transition-colors duration-300 ${
+              darkMode
+                ? 'bg-gradient-to-r from-green-900 to-green-800 text-white'
+                : 'bg-gradient-to-r from-green-200 to-green-100 text-gray-800'
+            }`}
+          >
+            <h2 className="text-xl font-bold mb-2">Monthly Overview</h2>
+            {monthlyData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="85%">
+                <LineChart
+                  data={monthlyData}
+                  margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke={darkMode ? '#555' : '#ccc'} />
+                  <XAxis 
+                    dataKey="date" 
+                    stroke={darkMode ? '#fff' : '#333'} 
+                    tick={{ fill: darkMode ? '#fff' : '#333' }} 
+                  />
+                  <YAxis stroke={darkMode ? '#fff' : '#333'} tick={{ fill: darkMode ? '#fff' : '#333' }} />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: darkMode ? '#333' : '#fff',
+                      color: darkMode ? '#fff' : '#333',
+                      border: `1px solid ${darkMode ? '#555' : '#ddd'}`
+                    }} 
+                  />
+                  <Legend wrapperStyle={{ color: darkMode ? '#fff' : '#333' }} />
+                  <Line type="monotone" dataKey="Happiness" stroke="#8884d8" activeDot={{ r: 8 }} />
+                  <Line type="monotone" dataKey="Energy" stroke="#82ca9d" />
+                  <Line type="monotone" dataKey="Stress" stroke="#ff7300" />
+                  <Line type="monotone" dataKey="Focus" stroke="#0088fe" />
+                  <Line type="monotone" dataKey="Calmness" stroke="#00C49F" />
+                </LineChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <p>No monthly data available</p>
+              </div>
+            )}
+          </div>
+        </div>
+        <div
+          className={`w-full shadow-xl rounded-lg p-8 transition-colors duration-300 ${
+            darkMode
+              ? 'bg-gradient-to-r from-purple-900 to-purple-800 text-white'
+              : 'bg-gradient-to-r from-purple-200 to-purple-100 text-gray-800'
+          }`}
+        >
+          <h2 className="text-xl font-bold mb-4">Progress Tracking</h2>
+          <SensorChart data={data} darkMode={darkMode} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
